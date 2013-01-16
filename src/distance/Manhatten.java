@@ -9,7 +9,8 @@ import data.Header;
 import data.IField;
 
 /**
- *
+ * Calculates the distance between to fields using manhatten measurement
+ * 
  * @author Severin Orth <severin.orth@st.ovgu.de>
  */
 public class Manhatten implements DataDistance {

@@ -6,6 +6,7 @@ import data.Field;
 import data.Header;
 import distance.DataDistance;
 import distance.Euklidian;
+import distance.Manhatten;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -139,6 +140,7 @@ public class KMeans {
      */
     public static void main(String[] args) {
         
+        // Process Data
         Data data;
         try {
             data = new Data(new File("src/cardata/car.data"));
@@ -146,15 +148,17 @@ public class KMeans {
             Logger.getLogger(KMeans.class.getName()).log(Level.SEVERE, null, ex);
             return;
         }
+        
+        // Provide an order of the attributes
         CarFieldComparator comp = new CarFieldComparator();
         for (Header header : data.getHeaders()) {
             header.provideTotalOder(comp);
         }
         
-        KMeans k = new KMeans(data, new Euklidian());
-        k.initCluster(4);
-        k.cluster();
-        
+        // Run KMeans with Euklidian distance measure
+        KMeans k = new KMeans(data, new Manhatten());
+        k.initCluster(4); // k = 4
+        k.cluster();        
         
         // Print Result
         Cluster[] cluster = k.getCluster();
@@ -178,15 +182,15 @@ public class KMeans {
         Header cls = data.getHeaders()[data.getHeaders().length-1];
         System.out.print(" ");
         System.out.print("\t");
-        for (String attribute : cls.getAttributes()) {
+        for (String attribute : cls.getAttributeValues()) {
             System.out.print(attribute);
             System.out.print("\t");
         }
         System.out.print("\n");
-        for (String x : cls.getAttributes()) {
+        for (String x : cls.getAttributeValues()) {
             System.out.print(x);
             System.out.print("\t");
-            for (String y : cls.getAttributes()) {
+            for (String y : cls.getAttributeValues()) {
                 int count = 0;                
                 for (int c = 0; c < cluster.length; c++) {
                     if (cluster[c].getCls().equals(y)) {

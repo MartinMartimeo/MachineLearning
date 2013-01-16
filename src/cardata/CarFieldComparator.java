@@ -5,6 +5,11 @@ import java.util.Comparator;
 
 /**
  *
+ * Provides an order for the data fields in car.data
+ * 
+ * It basicly translates all non numeric strings a number
+ * So "low"/"med"/"high" will be translated to 0/2/4
+ * 
  * @author Severin Orth <severin.orth@st.ovgu.de>
  */
 public class CarFieldComparator implements Comparator<String> {

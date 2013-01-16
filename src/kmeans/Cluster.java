@@ -12,7 +12,16 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- *
+ * Represantion of an KMeans-Cluster.
+ * 
+ * The Attribute centeroid saves the center location of this cluster
+ * with updateCenteroid this can be updated.
+ * 
+ * cls is the class of the cluster, distincted on updateCenteroid by majority vote on the classes in
+ * the cluster.
+ * 
+ * error_count/... are also updated on updateCenteroid primary out of interest for the result print
+ * 
  * @author Severin Orth <severin.orth@st.ovgu.de>
  */
 public class Cluster implements IField {

@@ -9,6 +9,7 @@ import data.Header;
 import data.IField;
 
 /**
+ * Calculates the distance between 2 fields using the Euklidian distance measure
  *
  * @author Severin Orth <severin.orth@st.ovgu.de>
  */

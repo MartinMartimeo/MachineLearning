@@ -30,7 +30,7 @@ public class Field extends HashMap<String, String> implements IField {
         
         for (int i = 0; i < header.length; i++) {
             this.put(header[i].getName(), data[i]);            
-            header[i].addAttribute(data[i]);
+            header[i].addAttributeValue(data[i]);
             
             if (i == header.length-1) {
                 this.cls = header[i];
@@ -53,6 +53,10 @@ public class Field extends HashMap<String, String> implements IField {
     /**
      * Get a value as integer
      * 
+     * If the attributes are integers this returns the value as integer
+     * If the attribute has a total order, it returns the index of the total order
+     * Otherwise it fails with runtime exception
+     * 
      * @param header
      * @return 
      */
@@ -63,7 +67,7 @@ public class Field extends HashMap<String, String> implements IField {
         if (header.isNumeric()) {
             return Integer.valueOf(value);
         } else if (header.isTotalOrder()) {
-            String[] attributes = header.getAttributes();
+            String[] attributes = header.getAttributeValues();
             for (int i = 0; i < attributes.length; i++) {
                 if (attributes[i].equals(value)) {
                     return i;

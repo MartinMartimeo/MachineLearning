@@ -5,7 +5,8 @@ import java.util.HashSet;
 import java.util.Map.Entry;
 
 /**
- * This is a HashSet with caluclating any doubles
+ * This is a HashSet that counts how often T has been added
+ * and provides a method to get the T that had been added most
  * 
  * @author Severin Orth <severin.orth@st.ovgu.de>
  */

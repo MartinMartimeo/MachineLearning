@@ -9,6 +9,7 @@ import java.util.Comparator;
 import java.util.HashSet;
 
 /**
+ * Saves the information about an attribute
  *
  * @author Severin Orth <severin.orth@st.ovgu.de>
  */
@@ -38,7 +39,7 @@ public class Header {
      * 
      * @param attribute 
      */
-    void addAttribute(String attribute) {
+    void addAttributeValue(String attribute) {
         if (attributes.add(attribute)) {
             attributes_order = null; // Forget order if there was a new element
         }
@@ -54,7 +55,7 @@ public class Header {
      * 
      * @return 
      */
-    public String[] getAttributes() {
+    public String[] getAttributeValues() {
         if (attributes_order != null) {
             return attributes_order;
         } else {
@@ -79,7 +80,7 @@ public class Header {
      */
     public void provideTotalOder(Comparator<String> comp) {
         
-        getAttributes();
+        getAttributeValues();
         Arrays.sort(attributes_order, comp);
         
         this.is_totalorder = true;

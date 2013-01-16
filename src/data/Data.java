@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.Random;
 
 /**
- *
+ * A data abstraction level parsing a csv file
+ * 
  * @author Severin Orth <severin.orth@st.ovgu.de>
  */
 public class Data {
