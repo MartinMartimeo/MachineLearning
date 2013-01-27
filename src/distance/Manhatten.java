@@ -44,4 +44,33 @@ public class Manhatten implements DataDistance {
     public int compare(IField a, IField b) {
         return (int) (distance(a, b));
     }    
+
+    @Override
+    public DataDistance createComparator(Field test) {
+        return new Manhatten.ManhattenFieldComparator(test);
+    }
+
+    private static class ManhattenFieldComparator extends Euklidian {
+        private final Field test;
+
+        public ManhattenFieldComparator(Field test) {
+            super();
+            this.test = test;            
+        }
+
+        @Override
+        public double distance(IField a, IField b) {
+            return super.distance(a, test) - super.distance(b, test);
+        }
+
+        @Override
+        public int compare(IField a, IField b) {
+            return super.compare(a, test) - super.compare(b, test);
+        }
+
+        @Override
+        public DataDistance createComparator(Field testset) {
+            throw new UnsupportedOperationException("Not supported.");
+        }
+    }
 }

@@ -49,6 +49,34 @@ public class Data {
             fields.add(field);    
         }
     }
+    
+    /**
+     * Divde into ps.length+1 subsets with distribution given by ps
+     * 
+     * The last subset will always contain all remaining fields
+     * 
+     * For example the call divideFields(0.33) will return 2 subsets, one with 
+     * 33% of all fields, the other with all remaining nodes
+     * 
+     * if the sum of ps is >= 1 the last subsets will be 0-length
+     * 
+     */
+    public List<Field>[] divideFields(double... ps) {
+        
+        List<Field>[] rtn = new ArrayList[ps.length+1];
+        List<Field> all = new ArrayList(); all.addAll(this.fields); // Create a modifable clone
+        Random r = new Random();
+        for (int pi = 0; pi < ps.length; pi++) {
+            rtn[pi] = new ArrayList<Field>();
+            for (int i = 0; i < this.fields.size() * ps[pi]; i++) {
+                int index = r.nextInt(all.size());
+                Field field = all.remove(index);
+                rtn[pi].add(field);
+            }
+        }
+        rtn[ps.length] = new ArrayList<Field>(); rtn[ps.length].addAll(all);                
+        return rtn;        
+    }
 
     /**
      * Get k random unique fields from dataset
@@ -89,6 +117,15 @@ public class Data {
      */
     public List<Field> getFields() {
         return this.fields;
+    }
+
+    /**
+     * Get size
+     * 
+     * @return 
+     */
+    public int size() {
+        return this.fields.size();
     }
 
     /**

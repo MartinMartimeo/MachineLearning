@@ -4,6 +4,7 @@
  */
 package distance;
 
+import data.Field;
 import data.IField;
 import java.util.Comparator;
 
@@ -14,5 +15,7 @@ import java.util.Comparator;
 public interface DataDistance extends Comparator<IField> {
     
     public double distance(IField a, IField b);
+
+    public DataDistance createComparator(Field testset);
     
 }
