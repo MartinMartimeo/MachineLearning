@@ -14,7 +14,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import kmeans.KMeans;
 
 /**
  *
@@ -87,7 +86,7 @@ public class KNN {
         try {
             data = new Data(new File("src/cardata/car.data"));
         } catch (IOException ex) {
-            Logger.getLogger(KMeans.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(KNN.class.getName()).log(Level.SEVERE, null, ex);
             return;
         }
         

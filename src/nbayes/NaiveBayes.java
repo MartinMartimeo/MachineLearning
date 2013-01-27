@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import kmeans.KMeans;
 
 /**
  *
@@ -31,7 +30,7 @@ public class NaiveBayes {
         try {
             data = new Data(new File("src/cardata/car.data"));
         } catch (IOException ex) {
-            Logger.getLogger(KMeans.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NaiveBayes.class.getName()).log(Level.SEVERE, null, ex);
             return;
         }
         
