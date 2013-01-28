@@ -26,7 +26,7 @@ public class KNN {
 
     /**
      * Constructs a KNN classificator, based on the dataset
-     * @param datasat
+     * @param dataset
      * @param k (how many nearest neighbor are choosen)
      * @param manhatten 
      */

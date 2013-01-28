@@ -94,6 +94,21 @@ public class CalcHashSet<T> extends HashSet<T> {
         return rtn;       
         
     }
+
+    /**
+     * Return the sum of all elements
+     * 
+     * @return 
+     */
+    public int sum() {
+        
+        int sum = 0;
+        for (Entry<T, Integer> entry : this.counts.entrySet()) {
+            sum += entry.getValue();
+        }
+        return sum;
+        
+    }
     
     
     

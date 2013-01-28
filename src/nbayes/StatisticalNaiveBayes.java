@@ -1,43 +1,31 @@
-package knn;
+package nbayes;
 
 import cardata.CarFieldComparator;
 import data.Data;
 import data.Field;
 import data.Header;
-import distance.DataDistance;
-import distance.Manhatten;
-import diverse.CalcHashSet;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import kmeans.KMeans;
 
 /**
- * Extends KNN with a tracking for printing a confusion matrix
- * 
+ *
  * @author Severin Orth <severin.orth@st.ovgu.de>
  */
-public class StatisticalKNN extends KNN {
+public class StatisticalNaiveBayes extends NaiveBayes {
     
-    List<String> cls;
     int[][] counts;
     
     /**
-     * Constructs a KNN classificator, based on the dataset, with tracking information for a confsuion matrix
+     * Constructs a  Naive Bayes classificator, based on the dataset, with tracking information for a confsuion matrix
      * @param dataset
-     * @param k (how many nearest neighbor are choosen)
-     * @param distance 
      */
-    public StatisticalKNN(List<Field> dataset, int k, DataDistance distance, Header[] header) {        
-        super(dataset, k, distance);
+    public StatisticalNaiveBayes(List<Field> dataset, Header[] header) {        
+        super(dataset, header);
         
-        this.cls = new ArrayList<String>();
-        this.cls.addAll(Arrays.asList(header[header.length-1].getAttributeValues()));
         this.counts = new int[this.cls.size()][this.cls.size()];
     }
 
@@ -98,12 +86,12 @@ public class StatisticalKNN extends KNN {
         List<Field> testset = sets[1];
         
         // Calculate Error Rate
-        StatisticalKNN knn = new StatisticalKNN(learnset, 5, new Manhatten(), data.getHeaders());
-        double rate = knn.calcErrorRate(testset);
-        System.out.println("Error Rate for this sample (using k=5): " + rate);        
+        StatisticalNaiveBayes nbayes = new StatisticalNaiveBayes(learnset, data.getHeaders());
+        double rate = nbayes.calcErrorRate(testset);
+        System.out.println("Error Rate for this sample: " + rate);        
         
         // Print confusion matrix
-        String[] cls = knn.getCls();
+        String[] cls = nbayes.getCls();
         System.out.println("* Confusion matrix:");
         System.out.print(" ");
         System.out.print("\t");        
@@ -117,15 +105,12 @@ public class StatisticalKNN extends KNN {
             System.out.print("\t");
             for (int y = 0; y < cls.length; y++) {
                 int count = 0;                                            
-                System.out.print(knn.getCounts()[x][y]);
+                System.out.print(nbayes.getCounts()[x][y]);
                 System.out.print("\t");
             }
             System.out.print("\n");
         }
         
     }
-    
-    
-    
     
 }

@@ -1,15 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package knn;
+package nbayes;
 
 import cardata.CarFieldComparator;
 import data.Data;
 import data.Field;
 import data.Header;
-import distance.DataDistance;
-import distance.Manhatten;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -17,30 +11,26 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import kmeans.KMeans;
 
-/**
- *
- * Extends KNN with a main function running 100 times with a k of 5
+/** *
+ * Extends Naive Bayes with a main function running 100 times
  * 
- * for this dataset the mean error rate is somewhere about 7,3%
- * one run provided eactly a mean error rate of: 7.298126064735944%
- * 
+ * for this dataset the mean error rate is somewhere about 14,9%
+ * one run provided eactly a mean error rate of: 14.896081771720619%
  * 
  * @author Severin Orth <severin.orth@st.ovgu.de>
  */
-public class KNN100Times extends KNN {
-
-    static final int k = 5;
+public class NaiveBayes100Times extends NaiveBayes {
     static final int iterations = 100;
     
     /**
-     * Constructs a KNN classificator, based on the dataset
+     * Construct a NaiveBayes classificator based on the dataset
+     * 
      * @param dataset
-     * @param distance 
+     * @param header 
      */
-    public KNN100Times(List<Field> dataset, DataDistance distance) {        
-        super(dataset, k, distance);
+    public NaiveBayes100Times(List<Field> dataset, Header[] header) {
+        super(dataset, header);
     }
-    
     
     /**
      * @param args the command line arguments
@@ -72,8 +62,8 @@ public class KNN100Times extends KNN {
             List<Field> testset = sets[1];
 
             // Calculate Error Rate
-            KNN knn = new KNN100Times(learnset, new Manhatten());
-            double rate = knn.calcErrorRate(testset);
+            NaiveBayes nbayes = new NaiveBayes(learnset, data.getHeaders());
+            double rate = nbayes.calcErrorRate(testset);
             System.out.println("* Error Rate for this sample (iteration=" + iteration + "): " + rate);   
             meanerrorsum += rate;
         }
@@ -82,7 +72,4 @@ public class KNN100Times extends KNN {
         System.out.println("Mean Error Rate: " + (meanerrorsum / iterations * 100) + "%");
         
     }
-    
-    
-    
 }
